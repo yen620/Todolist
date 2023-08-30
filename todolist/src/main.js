@@ -1,15 +1,18 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
-import router from './router'
+import App from './App.vue'
+
+// 1、导入ant-design-vue 组件库
+import store from './store'
+import Antd from 'ant-design-vue'
+
+// 2、导入组件库的样式表
+import 'ant-design-vue/dist/antd.css'
 
 Vue.config.productionTip = false
+// 3、安装组件库
+Vue.use(Antd)
 
-/* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
-})
+  store,
+  render: h => h(App)
+}).$mount('#app')
