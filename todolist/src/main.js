@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 
 // 1、导入ant-design-vue 组件库
-import store from './store'
+import store from './store.js'
 import Antd from 'ant-design-vue'
 
 // 2、导入组件库的样式表

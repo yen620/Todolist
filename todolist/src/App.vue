@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <a-input placeholder="请输入任务" class="my_ipt" />
-    <a-button type="primary">添加事项</a-button>
+    <a-input placeholder="請輸入代辦事項" class="my_ipt" />
+    <a-button type="primary">新增事項</a-button>
 
     <a-list bordered :dataSource="list" class="dt_list">
       <a-list-item slot="renderItem" slot-scope="item">
-        <!-- 复选框 -->
+        <!-- checkbox -->
         <a-checkbox>{{ item.info }}</a-checkbox>
-        <!-- 删除链接 -->
+        <!-- 刪除連結 -->
         <a slot="actions">删除</a>
       </a-list-item>
 
-      <!-- footer区域 -->
+      <!-- footer -->
       <div class="footer" slot="footer">
-        <span>0条剩余</span>
+        <span>還有0件未完成事項</span>
         <a-button-group>
           <a-button type="primary">全部</a-button>
           <a-button>未完成</a-button>
@@ -25,12 +25,16 @@
   </div>
 </template>
 <script>
+
 export default {
   name: 'app',
   data () {
     return {
       list: []
     }
+  },
+  created () {
+    this.$store.dispatch('getList')
   }
 }
 </script>

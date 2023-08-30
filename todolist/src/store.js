@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+
 // axios 非同步請求
 import axios from 'axios'
 
@@ -12,6 +13,7 @@ const store = new Vuex.Store({
     // 輸入框的內容
     inputValue: '123'
   },
+
   mutations: {
     // 不能寫非同步的操作
     // 參數是state，觸發是commit
@@ -23,17 +25,19 @@ const store = new Vuex.Store({
     }
 
   },
+
   actions: {
     // 非同步在這
     // 參數是mutation，不能直接修改state，觸發是dispatch
     getList (context) {
-      axios.get('/list.json')
+      axios.get('/Test/todolist/static/list.json')
         .then(({data}) => {
-          // console.log(data)
+        // console.log(data)
           context.commit('initList', data)
         })
     }
   },
+
   getters: {
     // 不修改state數值，觸發是getter
   }
