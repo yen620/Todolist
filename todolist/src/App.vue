@@ -1,9 +1,10 @@
 <template>
-  <div id="app">
-    <a-input placeholder="請輸入代辦事項" class="my_ipt" />
-    <a-button type="primary">新增事項</a-button>
+  <div id=  "app">
+    <a-input placeholder="請輸入代辦事項" class="my_ipt"
+      :value="inputValue" @change="handleInputChange"/>
+    <a-button type="primary" @click="addItemToList" >新增事項</a-button>
 
-    <a-list bordered :dataSource="list" class="dt_list">
+    <a-list bordered: this.dataSource ="list" class="dt_list">
       <a-list-item slot="renderItem" slot-scope="item">
         <!-- checkbox -->
         <a-checkbox>{{ item.info }}</a-checkbox>
@@ -24,19 +25,37 @@
     </a-list>
   </div>
 </template>
+
 <script>
+import { mapState } from 'vuex'
 
 export default {
   name: 'app',
   data () {
-    return {
-      list: []
-    }
+    return { list: [] }
   },
   created () {
     this.$store.dispatch('getList')
+  },
+  computed: {
+    ...mapState(['list', 'inputValue'])
+  },
+  methods: {
+    // 監聽輸入內容
+    handleInputChange (e) {
+      // console.log(e.target.value)
+      this.$store.commit('seInputValuet', e.target.value)
+    },
+    // 新增 Item 項
+    addItemToList () {
+      if (this.inputValue.trim().length <= 0) {
+        return this.$message.warring('輸入框內容不得為空!')
+      }
+      this.$store.commit('addItem')
+    }
   }
 }
+
 </script>
 <style scoped>
 #app {
